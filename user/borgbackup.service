@@ -1,0 +1,12 @@
+[Unit]
+Description=Perform a backup of the users home directory using borg(1)
+
+[Install]
+WantedBy=default.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/borg/autobackup/environment
+#ExecStartPre=/bin/systemctl --user stop borgmount.service
+ExecStart=/bin/sh -c "xargs borg create ::$(date $ARCHIVENAME_DATE_FORMAT) --verbose --stats --exclude-from %h/.config/borg/autobackup/exclude --exclude-caches --keep-tag-files < %h/.config/borg/autobackup/sourcedirs"
+#ExecStopPost=/bin/systemctl --user start borgmount.service

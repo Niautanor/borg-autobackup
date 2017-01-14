@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount borg(1) backup repository
+Conflicts=borgbackup.service
+
+[Install]
+WantedBy=default.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=%h/.config/borg/autobackup/environment
+ExecStart=/usr/bin/borg mount :: %h/${MOUNT_PATH}
+ExecStop=/usr/bin/fusermount -u %h/${MOUNT_PATH}

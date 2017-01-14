@@ -1,0 +1,23 @@
+# These environment variables are used directly by the borg(1) command. The
+# example configuration assumes that you have a restricted user backup on the
+# server indicated by host that you can connect to using the (passphraseless)
+# ssh-key /home/username/.ssh/backup.
+#
+# For the server side, you can refer to the deployment section of the borg
+# manual which describes all the fun things you can put in the authorized_keys
+# file of the backup user to make sure that it can only receive backups.
+#
+# Please note that the repository will NOT be automatically created if it does
+# not exist. You have to do that manually with borg init.
+BORG_RSH="ssh -i /home/username/.ssh/backup"
+BORG_REPO="backup@host:repo"
+BORG_PASSPHRASE="super secret passphrase"
+
+# New archives are created as ::$(date $ARCHIVENAME_DATE_FORMAT). Refer to
+# date(1) for the format syntax.
+ARCHIVENAME_DATE_FORMAT=+your-hostname-here-%Y-%m-%d
+
+# A relative path to the users home directory where the repository will be
+# mounted to by borgmount.service. Please take note of the caveats listed in
+# the README.
+MOUNT_PATH=backups
