@@ -3,6 +3,6 @@ Description=Perform a backup of the users home directory using borg(1)
 Conflicts=borgmount.service
 
 [Service]
-Type=oneshot
+Type=simple
 EnvironmentFile=/etc/borg/environment
 ExecStart=/bin/sh -c "xargs borg create ::$(date $ARCHIVENAME_DATE_FORMAT) --exclude-from /etc/borg/exclude --exclude-caches --keep-tag-files < /etc/borg/sourcedirs"
