@@ -1,5 +1,6 @@
 [Unit]
 Description=Perform a backup of the users home directory using borg(1)
+OnFailure=desktop-notification@%n.service
 
 [Install]
 WantedBy=default.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=Send the user a desktop notification to inform them about a failed user unit
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/notify-send --urgency=critical "Failed starting unit %i"
