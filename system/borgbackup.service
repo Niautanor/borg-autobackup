@@ -5,4 +5,4 @@ Conflicts=borgmount.service
 [Service]
 Type=simple
 EnvironmentFile=/etc/borg/environment
-ExecStart=/bin/sh -c "xargs borg create --exclude-from /etc/borg/exclude --exclude-caches --keep-exclude-files ::$(date $ARCHIVENAME_DATE_FORMAT) < /etc/borg/sourcedirs"
+ExecStart=/bin/sh -c "xargs borg create --exclude-from /etc/borg/exclude --exclude-caches --keep-tag-files ::$(date $ARCHIVENAME_DATE_FORMAT) < /etc/borg/sourcedirs"
