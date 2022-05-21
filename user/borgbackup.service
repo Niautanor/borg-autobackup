@@ -9,5 +9,5 @@ WantedBy=default.target
 Type=simple
 EnvironmentFile=%h/.config/borg/autobackup/environment
 #ExecStartPre=/bin/systemctl --user stop borgmount.service
-ExecStart=/bin/sh -c "xargs borg create --verbose --stats --exclude-from %h/.config/borg/autobackup/exclude --exclude-caches --keep-tag-files ::$(date $ARCHIVENAME_DATE_FORMAT) < %h/.config/borg/autobackup/sourcedirs"
+ExecStart=/bin/sh -c "sed '/^#/d' < %h/.config/borg/autobackup/sourcedirs | xargs -x borg create --verbose --stats --exclude-from %h/.config/borg/autobackup/exclude --exclude-caches --keep-exclude-tags ::$(date $ARCHIVENAME_DATE_FORMAT)"
 #ExecStopPost=/bin/systemctl --user start borgmount.service
